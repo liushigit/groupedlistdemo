@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="GroupedList.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GroupedList"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <CollectionViewSource
+        x:Name="AuthorHasACollectionOfBooks"
+        Source="{x:Bind viewModel.Authors}"
+        IsSourceGrouped="true"
+        ItemsPath="Books"/>
+        
+        <DataTemplate x:Key="AuthorGroupHeaderTemplateWide" x:DataType="local:Author">
+            <TextBlock Text="{x:Bind Name}"></TextBlock>
+        </DataTemplate>
+        
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ListView 
+            ItemsSource="{Binding Source={StaticResource AuthorHasACollectionOfBooks}}"
+            >
+            <ListView.GroupStyle >
+                <GroupStyle  HeaderTemplate="{StaticResource AuthorGroupHeaderTemplateWide}"/>
+            </ListView.GroupStyle>
+              
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Book">
+                    <StackPanel>
+                        <TextBlock>HIHIHIHIH</TextBlock>
+                         <TextBlock Height="50" Text="{x:Bind Title}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+</Page>
